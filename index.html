@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ROCK PAPER SCISSORS</title>
+</head>
+<body>
+    <script>
+        function getComputerChoice () {
+            let randomNumber = Math.random();
+            if (randomNumber <= 0.333) {
+                return 'rock'
+            } else if (randomNumber >= 0.667) {
+                return 'paper'
+            } else {return 'scissors'}
+            console.log(getComputerChoice)
+        }
+        function gameSelection (playerSelection, computerSelection) {
+            let playerSelection = prompt('Type in rock, paper, or scissors').toLocaleLowerCase;
+            let computerSelection = gameSelection;
+            if (playerSelection === computerSelection) {
+                return `It\s a tie! You both picked ${playerSelection}`
+        }
+    }
+    </script>
+</body>
+</html>
