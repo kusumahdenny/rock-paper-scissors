@@ -6,6 +6,7 @@
 </head>
 <body>
     <script>
+        //input from computer
         function getComputerChoice () {
             let randomNumber = Math.random();
             if (randomNumber <= 0.333) {
@@ -13,15 +14,41 @@
             } else if (randomNumber >= 0.667) {
                 return 'paper'
             } else {return 'scissors'}
-            console.log(getComputerChoice)
+           
         }
-        function gameSelection (playerSelection, computerSelection) {
-            let playerSelection = prompt('Type in rock, paper, or scissors').toLocaleLowerCase;
-            let computerSelection = gameSelection;
-            if (playerSelection === computerSelection) {
-                return `It\s a tie! You both picked ${playerSelection}`
-        }
-    }
+        //input from player
+        let playerSelection = prompt('Type in rock, paper, or scissors').toLowerCase;
+        let computerSelection = getComputerChoice();
+        function playRound (playerSelection, computerSelection) {         
+            if (playerSelection === 'rock') {
+                if (computerSelection === 'rock') {
+                    return 'It\'s a tie'
+                } else if (computerSelection === 'paper') {
+                    return lose
+                } else {return win}
+            }
+
+            else if (playerSelection === 'paper') {
+                if (computerSelection === 'rock') {
+                    return win
+                } else if (computerSelection === 'paper') {
+                    return tie
+                } else {return lose}
+            }
+
+            else if (playerSelection === 'scissors') {
+                if (computerSelection === 'rock') {
+                    return lose
+                } else if (computerSelection === 'paper') {
+                    return win
+                } else {return tie}
+            }
+            console.log(playRound(playerSelection, computerSelection))
+            
+        } 
+
+
+         
     </script>
 </body>
 </html>
