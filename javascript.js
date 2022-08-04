@@ -2,6 +2,13 @@ let playerScore = 0;
 let computerScore = 0;
 const button = document.querySelectorAll('input');
 
+//disable buttons after the game ends
+function disableButton () {
+    button.forEach(element => {
+        element.disabled = true
+    })
+}
+
 //input from computer
 function getComputerChoice () {
    let choices = ['ROCK', 'PAPER', 'SCISSORS'];
@@ -17,11 +24,12 @@ function playRound (playerSelection) {
          (playerSelection == 'SCISSORS' && computerSelection == 'ROCK')) {
 
             playerScore += 1;
-            result = ('YOU WIN THIS ROUND! ' + playerSelection + ' beats ' + computerSelection +
+            result = ('YOU WIN THIS ROUND! ' + playerSelection + ' BEATS ' + computerSelection +
                        '<br><br>Player Score: ' + playerScore + '<br>Computer Score: ' + computerScore);
             
             if (playerScore == 5) {
-                result += '<br><br>YOU WIN THIS GAME!!!';
+                result += '<br><br>YOU WIN THIS GAME!!! <br>Reload this page to play again';
+                disableButton()
             }
     } 
     else if (playerSelection == computerSelection) {
@@ -30,11 +38,12 @@ function playRound (playerSelection) {
     } 
     else {
     computerScore += 1;
-        result = ('YOU LOSE THIS ROUND! ' + computerSelection + ' beats ' + playerSelection +
+        result = ('YOU LOSE THIS ROUND! ' + computerSelection + ' BEATS ' + playerSelection +
                    '<br><br>Player Score: ' + playerScore + '<br>Computer Score: ' + computerScore);
             
         if (computerScore == 5) {
-            result += '<br><br>YOU LOSE THIS GAME!!!';
+            result += '<br><br>YOU LOSE THIS GAME!!! <br>Reload this page to try again';
+            disableButton()
         }
     }  
 
