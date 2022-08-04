@@ -1,62 +1,52 @@
+let playerScore = 0;
+let computerScore = 0;
+const button = document.querySelectorAll('input');
+
 //input from computer
 function getComputerChoice () {
-    let randomNumber = Math.random();
-    if (randomNumber <= 0.333) {
-        return 'rock'
-    } else if (randomNumber >= 0.667) {
-        return 'paper'
-    } else {return 'scissors'}
-   
+   let choices = ['ROCK', 'PAPER', 'SCISSORS'];
+   return choices[Math.floor(Math.random()*choices.length)];
 }
 //input from player
+function playRound (playerSelection) {         
+    let computerSelection = getComputerChoice();
+    let result = '';
+    
+    if  ((playerSelection == 'ROCK' && computerSelection == 'PAPER') ||
+         (playerSelection == 'PAPER' && computerSelection == 'SCISSORS') ||
+         (playerSelection == 'SCISSORS' && computerSelection == 'ROCK')) {
 
-function playRound (playerSelection, computerSelection) {         
-    if (playerSelection === 'rock') {
-        if (computerSelection === 'rock') {
-          return 'It\'s a tie';
-      } else if (computerSelection === 'paper') {
-          computerScore++;
-          return lose;
-      } else {
-          userScore++;
-          return win; 
+            playerScore += 1;
+            result = ('YOU WIN THIS ROUND! ' + playerSelection + ' beats ' + computerSelection +
+                       '<br><br>Player Score: ' + playerScore + '<br>Computer Score: ' + computerScore);
+            
+            if (playerScore == 5) {
+                result += '<br><br>YOU WIN THIS GAME!!!';
+            }
+    } 
+    else if (playerSelection == computerSelection) {
+    result = 'IT\S A DRAW! YOU BOTH PICKED ' + playerSelection +
+             '<br><br>Player Score: ' + playerScore + '<br>Computer Score: ' + computerScore;
+    } 
+    else {
+    computerScore += 1;
+        result = ('YOU LOSE THIS ROUND! ' + computerSelection + ' beats ' + playerSelection +
+                   '<br><br>Player Score: ' + playerScore + '<br>Computer Score: ' + computerScore);
+            
+        if (computerScore == 5) {
+            result += '<br><br>YOU LOSE THIS GAME!!!';
         }
-    }
-    else if (playerSelection === 'paper') {
-        if (computerSelection === 'rock') {
-          userScore++;
-          return win;
-        } else if (computerSelection === 'paper') {
-          return tie;
-        } else {
-          computerScore++;
-          return lose;
-          
-        }
-    }
-    else if (playerSelection === 'scissors') {
-       if (computerSelection === 'rock') {
-          computerScore++;  
-          return lose;
-     } else if (computerSelection === 'paper') {
-          userScore++;  
-          return win;
-     } else {
-          return tie;}
-    }
+    }  
 
+    document.getElementById('result').innerHTML = result
+    return
 } 
-let win = 'You Win!';
-let lose = 'You Lose!';
-let tie = 'It\s A Tie!';
-let userScore = parseInt(0);
-let computerScore = parseInt(0);
 
-let playerSelection = prompt('Type in rock, paper, or scissors').toLowerCase();
-let computerSelection = getComputerChoice();
-console.log('You picked ' + playerSelection);
-console.log('Computer picked ' + computerSelection);
-console.log(playRound(playerSelection, computerSelection));
-console.log('You ' + userScore + ' - ' + computerScore + ' Computer')
+button.forEach(button => {
+    button.addEventListener('click', function(){
+        playRound(button.value)
+    })
+});
+
 
  
